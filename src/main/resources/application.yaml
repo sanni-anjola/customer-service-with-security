@@ -1,0 +1,49 @@
+appliaction:
+  name: Customer Service API Server
+
+server:
+  port: 8080
+
+
+# # Spring properties
+spring:
+  # Datasource properties. Using MySQL database
+  datasource:
+    password: pass_123
+    username: customer_service_user
+    #It will always use MySQL:SELECT @@GLOBAL.time_zone;
+    url: jdbc:mysql://127.0.0.1:3306/customer_db?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
+
+  ## Hibernate Properties
+  # The SQL dialect makes Hibernate generate better SQL for the chosen database
+  jpa:
+    hibernate:
+      ddl-auto: update #Change this to none in production environment
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+
+  #Jackson date conversion properties
+  jackson:
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+    timezone: UTC
+
+  sql:
+    init:
+      mode: always
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ajeed4all@gmail.com
+    password: aafaakallau
+
+
+# Application specific custom properties
+app:
+  config:
+    max_age_secs: 3600
+  jwt:
+    secret: JWTSuperTokenSecretKeyAndJWTSuperTokenSecretKey
+    expiration: 604800000 # 7 days expiration time in milli-seconds
