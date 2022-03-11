@@ -48,8 +48,14 @@ public class AdminController {
                     HttpStatus.BAD_REQUEST), HttpStatus.BAD_REQUEST);
         }
 
-        User user = userService.register(userRegisterRequest);
-        return new ResponseEntity<>(user, HttpStatus.CREATED);
+        User newUser = null;
+        try {
+            newUser = userService.register(userRegisterRequest);
+        }catch (Exception ex){
+            return new ResponseEntity<>(new APIResponse(false, "Something went wrong",
+                    HttpStatus.BAD_REQUEST), HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
 
     @PutMapping("/users/{id}")

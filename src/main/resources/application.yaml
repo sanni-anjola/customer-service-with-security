@@ -33,11 +33,23 @@ spring:
     init:
       mode: always
 
+  profiles:
+    active: ${PROFILE:dev}
+
   mail:
-    host: smtp.gmail.com
-    port: 587
-    username: ajeed4all@gmail.com
-    password: ${smtp_password}
+    host: ${SMTP_HOST}
+    port: ${SMTP_PORT}
+    username: ${SMTP_USERNAME}
+    password: ${SMTP_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          ssl:
+            enable: true
+            trust: "*"
+          starttls:
+            enable: true
 
 # swagger-ui path
 # Application specific custom properties

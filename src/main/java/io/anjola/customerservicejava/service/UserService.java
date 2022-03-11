@@ -2,6 +2,7 @@ package io.anjola.customerservicejava.service;
 
 import io.anjola.customerservicejava.model.entity.user.Role;
 import io.anjola.customerservicejava.model.entity.user.User;
+import io.anjola.customerservicejava.model.entity.user.VerificationCode;
 import io.anjola.customerservicejava.payload.auth.JwtAuthenticationResponse;
 import io.anjola.customerservicejava.payload.auth.LoginRequest;
 import io.anjola.customerservicejava.payload.auth.SignUpRequest;
@@ -27,6 +28,12 @@ public interface UserService {
 
     JwtAuthenticationResponse signin(LoginRequest loginRequest);
 
-    User register(SignUpRequest signUpRequest);
-    User register(UserRegisterRequest userRegisterRequest);
+    User register(SignUpRequest signUpRequest) throws Exception;
+    User register(UserRegisterRequest userRegisterRequest) throws Exception;
+
+    void deleteVerification(VerificationCode code);
+
+    VerificationCode getCode(Long id);
+
+    VerificationCode save(VerificationCode code);
 }

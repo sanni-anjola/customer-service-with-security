@@ -102,16 +102,4 @@ public class UserPrincipal implements UserDetails {
         return isEnabled;
     }
 
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(id);
-//    }
-
-//    @Override
-//    public boolean equals(Object obj) {
-//        if(this == obj) return true;
-//        if(obj == null || getClass() != obj.getClass()) return false;
-//        UserPrincipal that = (UserPrincipal) obj;
-//        return Objects.equals(id, that.id);
-//    }
 }
