@@ -32,4 +32,15 @@ public class ApplicationConstants {
     public static final String POST_ENDPOINTS = API_PREFIX + "/post/**";
     public static final String POST_ENDPOINT = API_PREFIX + "/post";
 
+
+    //PUBLIC ENDPOINTS
+    public static final String[] PUBLIC_ENDPOINTS = {"/",
+            "/favicon.ico", "/**/*.png", "/**/*.gif", "/**/*.svg", "/**/*.jpg", "/**/*.html", "/**/*.css", "/**/*.js", "/v3/api-docs/**"};
+    /*
+    Mail Constants
+     */
+
+    public static final String FROM_EMAIL = "all4ajeed@gmail.com";
+    public static final String FROM_NAME = "Sanni Lateef Anjola";
+    public static final String MAIL_SUBJECT = "No Reply - ";
 }

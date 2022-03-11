@@ -1,35 +1,29 @@
 package io.anjola.customerservicejava.controller.admin;
 
-import io.anjola.customerservicejava.exception.ApplicationException;
 import io.anjola.customerservicejava.exception.NotFoundException;
-import io.anjola.customerservicejava.model.entity.user.Role;
 import io.anjola.customerservicejava.model.entity.user.User;
 import io.anjola.customerservicejava.payload.APIResponse;
 import io.anjola.customerservicejava.payload.user.UserRegisterRequest;
 import io.anjola.customerservicejava.payload.user.UserUpdateRequest;
 import io.anjola.customerservicejava.service.UserService;
 import io.anjola.customerservicejava.util.ApplicationConstants;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Collections;
 import java.util.List;
 
 
 @RestController
+@Validated
+@RequiredArgsConstructor
 @RequestMapping(ApplicationConstants.ADMIN_ENDPOINT)
 public class AdminController {
 
     private final UserService userService;
-    private final PasswordEncoder passwordEncoder;
-
-    public AdminController(UserService userService, PasswordEncoder passwordEncoder) {
-        this.userService = userService;
-        this.passwordEncoder = passwordEncoder;
-    }
 
     @GetMapping("/users")
     public List<User> getAllUser(){
@@ -54,19 +48,7 @@ public class AdminController {
                     HttpStatus.BAD_REQUEST), HttpStatus.BAD_REQUEST);
         }
 
-        User user = new User(userRegisterRequest.getName(), userRegisterRequest.getUsername(),
-                userRegisterRequest.getEmail(), userRegisterRequest.getPassword());
-
-
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-
-        Role role = userService.getUserRole(userRegisterRequest.getRole())
-                .orElseThrow(() -> new ApplicationException("User Role not set."));
-        user.setRoles(Collections.singleton(role));
-        user.setIsEnabled(true);
-
-        user = userService.addUser(user);
-
+        User user = userService.register(userRegisterRequest);
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 

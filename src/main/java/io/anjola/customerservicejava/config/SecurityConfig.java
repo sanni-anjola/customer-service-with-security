@@ -82,6 +82,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                     .antMatchers(ApplicationConstants.AUTH_ENDPOINTS).permitAll()
+                    .antMatchers(ApplicationConstants.PUBLIC_ENDPOINTS).permitAll()
                     .antMatchers(ApplicationConstants.USER_AVAILABILITY_ENDPOINT,
                             ApplicationConstants.EMAIL_AVAILABILITY_ENDPOINT).permitAll()
                     .antMatchers(HttpMethod.GET, ApplicationConstants.PRODUCT_ENDPOINTS,
