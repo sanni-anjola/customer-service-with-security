@@ -121,16 +121,13 @@ public class UserServiceImpl implements UserService {
         verificationCode.setUser(user);
         verificationCode.setCode(randomCode);
 
-        log.info("I got here successfully ->{}", verificationCode);
         user.setIsEnabled(false);
         String siteUrl = "http://localhost:8080/api/v1/";
 
-        log.info("I got here again successfully ->{}", verificationCode);
         mail.sendEmail(user.getEmail(), "Verification Mail", MailUtil.verificationMail(siteUrl, user.getId(), user.getName(), randomCode));
 
         verificationCodeRepository.save(verificationCode);
 
-        log.info("I got here again again successfully ->{}", verificationCode);
         return addUser(user);
     }
 

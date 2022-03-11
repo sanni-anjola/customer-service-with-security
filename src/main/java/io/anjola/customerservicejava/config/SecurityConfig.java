@@ -85,9 +85,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers(ApplicationConstants.PUBLIC_ENDPOINTS).permitAll()
                     .antMatchers(ApplicationConstants.USER_AVAILABILITY_ENDPOINT,
                             ApplicationConstants.EMAIL_AVAILABILITY_ENDPOINT).permitAll()
-                    .antMatchers(HttpMethod.GET, ApplicationConstants.PRODUCT_ENDPOINTS,
-                            ApplicationConstants.PRODUCT_CATEGORY_ENDPOINTS, ApplicationConstants.BRAND_ENDPOINTS)
-                        .permitAll()
                     .anyRequest()
                         .authenticated();
         // Add the custom JWT security filter

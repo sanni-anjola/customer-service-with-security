@@ -27,7 +27,6 @@ public class MailConfig {
         messageHelper.setSubject(MAIL_SUBJECT.concat(subject));
         messageHelper.setText(content, true);
 
-        log.info("Just about to send the message");
         javaMailSender.send(mimeMessage);
 
     }
