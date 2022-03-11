@@ -22,8 +22,7 @@ public class MailConfig {
     public void sendEmail(String to, String subject, String content) throws Exception{
         final MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         final MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, "utf-8");
-        mimeMessage.setFrom("sanni.anjola@gmail.com");
-//        messageHelper.setFrom(FROM_EMAIL, FROM_NAME);
+        messageHelper.setFrom(FROM_EMAIL, FROM_NAME);
         messageHelper.setTo(to);
         messageHelper.setSubject(MAIL_SUBJECT.concat(subject));
         messageHelper.setText(content, true);
