@@ -1,7 +1,4 @@
 INSERT INTO roles (id, name) VALUES
-(2, 'ROLE_ADMIN'),
-(3, 'ROLE_SUPER_USER'),
-(4, 'ROLE_SELLER'),
-(1, 'ROLE_USER'),
-(5, 'ROLE_MANAGER'),
-(6, 'ROLE_CUSTOMER');
+(1, 'ROLE_ADMIN'),
+(2, 'ROLE_USER'),
+(3, 'ROLE_CUSTOMER');
