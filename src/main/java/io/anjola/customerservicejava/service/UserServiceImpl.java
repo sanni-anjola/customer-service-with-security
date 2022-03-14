@@ -2,7 +2,6 @@ package io.anjola.customerservicejava.service;
 
 import io.anjola.customerservicejava.config.MailConfig;
 import io.anjola.customerservicejava.exception.ApplicationException;
-import io.anjola.customerservicejava.exception.NotFoundException;
 import io.anjola.customerservicejava.model.entity.user.Role;
 import io.anjola.customerservicejava.model.entity.user.User;
 import io.anjola.customerservicejava.model.entity.user.VerificationCode;
@@ -97,7 +96,7 @@ public class UserServiceImpl implements UserService {
         return new JwtAuthenticationResponse(jwt, "Bearer");
     }
 
-    public User register(SignUpRequest signUpRequest) throws Exception {
+    public User register(SignUpRequest signUpRequest) {
         return getUser(signUpRequest.getName(), signUpRequest.getUsername(), signUpRequest.getEmail(), signUpRequest.getPassword(), signUpRequest.getRole());
     }
 
@@ -106,7 +105,7 @@ public class UserServiceImpl implements UserService {
         return getUser(userRegisterRequest.getName(), userRegisterRequest.getUsername(), userRegisterRequest.getEmail(), userRegisterRequest.getPassword(), userRegisterRequest.getRole());
     }
 
-    private User getUser(String name, String username, String email, String password, Long role2) throws Exception {
+    private User getUser(String name, String username, String email, String password, Long role2) {
         User user = new User(name, username,
                 email, password);
 
@@ -122,13 +121,17 @@ public class UserServiceImpl implements UserService {
         verificationCode.setCode(randomCode);
 
         user.setIsEnabled(false);
-        String siteUrl = "http://localhost:8080/api/v1/";
-
-        mail.sendEmail(user.getEmail(), "Verification Mail", MailUtil.verificationMail(siteUrl, user.getId(), user.getName(), randomCode));
+        String siteUrl = "http://localhost:8080/api/v1/auth/";
 
         verificationCodeRepository.save(verificationCode);
 
-        return addUser(user);
+        try {
+            mail.sendEmail(user.getEmail(), "Verification Mail", MailUtil.verificationMail(siteUrl, user.getId(), user.getName(), randomCode));
+        } catch (Exception e) {
+            log.error("Error sending email", e);
+        }
+
+        return user;//addUser(user);
     }
 
     public void deleteVerification(VerificationCode code) {

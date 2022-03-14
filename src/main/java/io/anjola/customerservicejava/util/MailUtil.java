@@ -14,7 +14,6 @@ public class MailUtil {
 
 
         content = content.replace("[[name]]", name);
-//        String verifyURL = siteURL + "/verify?code=" + user.getVerificationCode();
         String verifyURL = String.format("%s%s/verify?code=%s",siteURL, id, code);
 
         content = content.replace("[[URL]]", verifyURL);

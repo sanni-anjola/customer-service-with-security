@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Async;
 
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -19,6 +20,7 @@ public class MailConfig {
         this.javaMailSender = javaMailSender;
     }
 
+    @Async
     public void sendEmail(String to, String subject, String content) throws Exception{
         final MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         final MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, "utf-8");

@@ -28,7 +28,7 @@ public interface UserService {
 
     JwtAuthenticationResponse signin(LoginRequest loginRequest);
 
-    User register(SignUpRequest signUpRequest) throws Exception;
+    User register(SignUpRequest signUpRequest);
     User register(UserRegisterRequest userRegisterRequest) throws Exception;
 
     void deleteVerification(VerificationCode code);

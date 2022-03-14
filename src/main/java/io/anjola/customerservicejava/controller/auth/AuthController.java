@@ -47,14 +47,14 @@ public class AuthController {
             return new ResponseEntity<>(new APIResponse(false, "Email Address already in use!",
                     HttpStatus.BAD_REQUEST), HttpStatus.BAD_REQUEST);
         }
-        User newUser = null;
-        try {
-            newUser = userService.register(signUpRequest);
+        User newUser = userService.register(signUpRequest);
+        /*try {
+            newUser =
         }catch (Exception ex){
             log.info("Signup --> {}", ex.getMessage());
             return new ResponseEntity<>(new APIResponse(false, "Something went wrong",
                     HttpStatus.BAD_REQUEST), HttpStatus.BAD_REQUEST);
-        }
+        }*/
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentContextPath().path("/api/v1/users/{username}")
